@@ -1,4 +1,62 @@
+
 <?php
+#include "connect_db.php";
+
+
+function insertData($city, $temp) {
+    $server = "mysql:host=localhost;dbname=project";
+    $username = "root";
+    $password = "";
+            
+try{
+    $conn = new PDO($server, $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = "INSERT INTO weather_forecast (city, temperature) VALUES ('$city', '$temp')";
+    $conn->exec($sql);
+}
+catch(PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+            return null;
+        }
+    }
+
+function getData() {
+    $server = "mysql:host=localhost;dbname=project";
+    $username = "root";
+    $password = "";
+    
+    try{
+            $conn = new PDO($server, $username, $password);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = "SELECT * FROM weather_forecast";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if ($result) {
+                foreach ($result as $row) {
+                    echo "City: " . $row["city"] . " - Temperature: " . $row["temperature"] . "<br>";
+                }
+            } else {
+                echo "0 results";
+            }
+        }
+        catch(PDOException $e) {
+                    echo "Connection failed: " . $e->getMessage();
+                    return null;
+                }
+}
+
+// Usage example:
+// $conn = connectToDatabase();
+// if ($conn) {
+//     insertData($conn, "New York", 25);
+//     getData($conn);
+//     // Close connection
+//     $conn = null;
+// } else {
+//     echo "Failed to connect to the database.";
+// }
+
 // API Key
 $Api = '040d1885618d5b4f42d9de24a810a32b';
 $city;
@@ -39,7 +97,9 @@ if(isset($_POST['submit'])){
                 'description' => $description,
                 'icon' => $icon
             );
-        } else {
+
+            insertData(strtoupper($city),  floor($temperature - 273.15) . ' C ');
+        } else {    
             $GlobalWeather = array(
                 'temperature' => 'Error: ' . $data['message'],
                 'description' => '',
@@ -54,6 +114,8 @@ if(isset($_POST['submit'])){
         $img = new stdClass();
         $bodyStyle = new stdClass();
     
+        echo " Global = " . $GlobalWeather;
+
         switch ($GlobalWeather) {
             case 'Clouds':
                 $img->src = 'images/clouds.png';
