@@ -16,10 +16,14 @@
     <div id="main">
         <div class="search">
         <form method="post" action="app.php">
-        <label for="city-name">City Name:</label>
-        <input type="text" id="cityname" name="cityname" required>
-        <button type="submit" name="submit">Search</button>
-    </form>
+            <label for="city-name">City Name:</label>
+            <input type="text" id="cityname" name="cityname" required>
+            <button type="submit" name="submit">Search</button>
+        </form>
+        </div>
+
+        <div>
+            <a href="history.php">History</a>
         </div>
     </div>
 
