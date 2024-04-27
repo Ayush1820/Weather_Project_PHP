@@ -121,3 +121,11 @@ button{
 #styled-table tbody tr:last-of-type {
     border-bottom: 2px solid #009879;
 }
+
+#history {
+    font-size: 1em;
+    font-family: sans-serif;
+    border-radius: 10px;
+    color: white;
+    border: 1000px;
+}

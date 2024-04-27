@@ -33,13 +33,6 @@ function getData() {
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $result;
-            // if ($result) {
-            //     foreach ($result as $row) {
-            //         echo "City: " . $row["city"] . " - Temperature: " . $row["temperature"] . "<br>";
-            //     }
-            // } else {
-            //     echo "0 results";
-            // }
         }
         catch(PDOException $e) {
                     echo "Connection failed: " . $e->getMessage();

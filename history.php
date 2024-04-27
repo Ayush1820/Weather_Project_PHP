@@ -15,10 +15,10 @@
 
     <div id="main">
         <div class="search">
+            <a class="history" href="index.php"> Back to main page</a>
             <?php
                 include "process.php";
                 $data = getData();
-                #echo $data;
                 if($data){
                     echo '<table class="styled-table">';
                     echo '<thead><tr><th>ID</th><th>City</th><th>Temperature</th></tr></thead>';

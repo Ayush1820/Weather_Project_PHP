@@ -20,6 +20,9 @@
         <input type="text" id="cityname" name="cityname" required>
         <button type="submit" name="submit">Search</button>
     </form>
+    <div>
+            <a id="history" href="history.php">History</a>
+        </div>
         </div>
     </div>
 
