@@ -29,11 +29,6 @@
 
             <?php include "process.php";
 
-            // API Key
-            $Api = '040d1885618d5b4f42d9de24a810a32b';
-            $city;
-            $GlobalWeather;
-
             if(isset($_POST['submit'])){
                 $city = $_POST['cityname'];
                 $img['src'] = '';
