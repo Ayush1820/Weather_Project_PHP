@@ -72,7 +72,7 @@ if(isset($_POST['submit'])){
             <button type="submit" name="submit">Search</button>
         </form>
         <div>
-            <a id="history" href="history.php">History</a>
+        <a id="history" href="history.php?userId=<?php echo $randomString ?>">History</a>
         </div>
         </div>
 

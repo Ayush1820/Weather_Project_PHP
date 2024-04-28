@@ -22,7 +22,7 @@ catch(PDOException $e) {
         }
     }
 
-function getData() {
+function getData($hidden_value) {
     $server = "mysql:host=localhost;dbname=project";
     $username = "root";
     $password = "";
@@ -30,7 +30,7 @@ function getData() {
     try{
             $conn = new PDO($server, $username, $password);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "SELECT * FROM weather_forecast";
+            $sql = "SELECT * FROM weather_forecast WHERE userId='$hidden_value'";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
