@@ -3,7 +3,7 @@
 #include "connect_db.php";
 
 
-function insertData($city, $temp) {
+function insertData($city, $temp, $hidden_value) {
     $server = "mysql:host=localhost;dbname=project";
     $username = "root";
     $password = "";
@@ -11,7 +11,9 @@ function insertData($city, $temp) {
 try{
     $conn = new PDO($server, $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = "INSERT INTO weather_forecast (city, temperature) VALUES ('$city', '$temp')";
+    $current_time = date("Y-m-d H:i:s");
+
+    $sql = "INSERT INTO weather_forecast (city, temperature, atTime, userId) VALUES ('$city', '$temp', '$current_time', '$hidden_value')";
     $conn->exec($sql);
 }
 catch(PDOException $e) {
@@ -40,29 +42,31 @@ function getData() {
                 }
 }
 
-// Usage example:
-// $conn = connectToDatabase();
-// if ($conn) {
-//     insertData($conn, "New York", 25);
-//     getData($conn);
-//     // Close connection
-//     $conn = null;
-// } else {
-//     echo "Failed to connect to the database.";
-// }
+
+function generateRandomString($length = 10) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $randomString = '';
+    $max = strlen($characters) - 1;
+    
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[mt_rand(0, $max)];
+    }
+    
+    return $randomString;
+}
+
+$randomString = generateRandomString(6);
 
 // API Key
 $Api = '040d1885618d5b4f42d9de24a810a32b';
 $city;
 $GlobalWeather;
 
-
-
     function ConvertToDegree($value, $t) {
         return floor($value - 273.15) . ' C ' . strtoupper($t) . ' ';
     }
     
-    function getWeather() {
+    function getWeather($hidden_value) {
         global $Api, $city, $GlobalWeather;
     
         // Fetch weather data from API
@@ -80,7 +84,7 @@ $GlobalWeather;
                 'icon' => $icon
             );
 
-            insertData(strtoupper($city),  floor($temperature - 273.15) . ' C ');
+            insertData(strtoupper($city),  floor($temperature - 273.15) . ' C ', $hidden_value);
         } else {    
             $GlobalWeather = array(
                 'temperature' => 'Error: ' . $data['message'],

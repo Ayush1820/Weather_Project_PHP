@@ -34,8 +34,9 @@
 
             if(isset($_POST['submit'])){
                 $city = $_POST['cityname'];
+                $hidden_value = $_POST['hidden_field'];
                 $img['src'] = '';
-                getWeather();
+                getWeather($hidden_value);
             }
             ?>
             
