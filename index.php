@@ -15,14 +15,14 @@
 
     <div id="main">
         <div class="search">
-        <form method="post" action="app.php">
-            <label for="city-name">City Name:</label>
-            <input type="text" id="cityname" name="cityname" required>
+        <form method="post" action="main.php">
+            <label for="user-name">User Name</label>
+            <input type="text" id="userName" name="userName" required>
+
+            <label for="password"></label>
+            <input type="password" id="passwrod" name="password" required>
             <button type="submit" name="submit">Search</button>
         </form>
-        <div>
-            <a id="history" href="history.php">History</a>
-        </div>
         </div>
 
     </div>
