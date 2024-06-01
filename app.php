@@ -44,6 +44,14 @@ if(isset($_POST['submit'])){
             <?php if (isset($GlobalWeather)) { ?>
                     <div style="font-size: 40px;" ><?php echo $GlobalWeather['temperature']; ?></div>
                     <img id="img" src="http://openweathermap.org/img/w/<?php echo $GlobalWeather['icon']; ?>.png" alt="Weather Icon">
+                    <div>
+                        <div style="font-size: 25px;">Max Temperature today <?php echo $GlobalWeather['max_tmp']; ?></div>
+                        <div style="font-size: 25px;">Min Temperature today <?php echo $GlobalWeather['min_tmp']; ?></div>
+                        <div style="font-size: 25px;">Humidity <?php echo $GlobalWeather['humidity']; ?></div>
+                        <div style="font-size: 25px;">Wind Speed <?php echo $GlobalWeather['speed']; ?></div>
+                    
+                    </div>
+                    
                 <?php }
 
             ?>

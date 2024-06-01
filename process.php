@@ -73,15 +73,24 @@ $GlobalWeather;
         $url = 'http://api.openweathermap.org/data/2.5/weather?q=' . $city . '&appid=' . $Api;
         $response = file_get_contents($url);
         $data = json_decode($response, true);
-    
+
         if ($data['cod'] == 200) {
             $temperature = $data['main']['temp'];
             $description = $data['weather'][0]['description'];
             $icon = $data['weather'][0]['icon'];
+            $max_tmp = $data['main']['temp_max'];
+            $min_tmp = $data['main']['temp_min'];
+            $humidity = $data['main']['humidity'];
+            $wind_speed = $data['wind']['speed'];
+            
             $GlobalWeather = array(
                 'temperature' => ConvertToDegree($temperature, $city),
                 'description' => $description,
-                'icon' => $icon
+                'icon' => $icon,
+                'max_tmp' => ConvertToDegree($max_tmp, ''),
+                'min_tmp' => ConvertToDegree($min_tmp, ''),
+                'humidity' => $humidity,
+                'speed' => $wind_speed
             );
 
             insertData(strtoupper($city),  floor($temperature - 273.15) . ' C ', $hidden_value);
